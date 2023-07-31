@@ -13,11 +13,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 // elementPlus自动导入相关配置
-// eslint-disable-next-line import/no-unresolved
 const AutoImport = require('unplugin-auto-import/webpack')
-// eslint-disable-next-line import/no-unresolved
 const Components = require('unplugin-vue-components/webpack')
-// eslint-disable-next-line import/no-unresolved
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 let isProd = true

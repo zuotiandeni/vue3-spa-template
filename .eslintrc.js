@@ -64,5 +64,9 @@ module.exports = {
 		'vue/multi-word-component-names': 0,
 		// 禁止变量声明覆盖外层作用域的变量
 		'no-shadow': ['error', { allow: ['state', 'getters'] }],
+		// 默认情况下一个抛出被要求使用 export default
+		'import/prefer-default-export': [
+			{ target: 'single' | 'any' }, // default is "single"
+		],
 	},
 }

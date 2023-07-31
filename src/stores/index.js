@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 // 第一个参数是应用程序中 store 的唯一 id
-const useUser = defineStore('useUser', {
+export const useUser = defineStore('useUser', {
 	state: () => {
 		return {
 			age: 18,
@@ -25,6 +25,3 @@ const useUser = defineStore('useUser', {
 		storage: sessionStorage, // 默认被存储在localstorage中
 	},
 })
-export default {
-	useUser,
-}
