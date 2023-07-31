@@ -1,19 +1,20 @@
 <!-- src/App.vue -->
 <script setup>
-	import { useUser } from "@/stores/index";
-	import { ref } from "vue";
-	const welcome = ref("Hello vue");
+import { ref } from 'vue'
+import { useUser } from '@/stores/index'
 
-	const user = useUser();
-	// 默认情况下，您可以通过 store 实例访问状态来直接读取和写入状态：
-	const addUserAge = () => {
-		// 方式一：非解构修改数据
-		// user.age++;
-		// 方式二：非解构修改数据
-		user.$patch(state => {
-			state.age += 1;
-		});
-	};
+const welcome = ref('Hello vue')
+
+const user = useUser()
+// 默认情况下，您可以通过 store 实例访问状态来直接读取和写入状态：
+const addUserAge = () => {
+	// 方式一：非解构修改数据
+	// user.age++;
+	// 方式二：非解构修改数据
+	user.$patch(state => {
+		state.age += 1
+	})
+}
 </script>
 
 <template>
