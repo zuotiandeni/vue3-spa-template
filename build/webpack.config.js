@@ -1,35 +1,38 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
-const appHtml = path.resolve(__dirname, "../public/index.html");
+const appHtml = path.resolve(__dirname, '../public/index.html')
 // 本插件会提取css到单独的文件
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 此插件用于优化和压缩CSS
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 // const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader')
 
 // elementPlus自动导入相关配置
-const AutoImport = require("unplugin-auto-import/webpack");
-const Components = require("unplugin-vue-components/webpack");
-const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
+// eslint-disable-next-line import/no-unresolved
+const AutoImport = require('unplugin-auto-import/webpack')
+// eslint-disable-next-line import/no-unresolved
+const Components = require('unplugin-vue-components/webpack')
+// eslint-disable-next-line import/no-unresolved
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
-let isProd = true;
+let isProd = true
 function getWebpackConfig() {
-	isProd = process.env.NODE_ENV === "production";
+	isProd = process.env.NODE_ENV === 'production'
 	return {
-		mode: isProd ? "production" : "development",
-		devtool: isProd ? "source-map" : "eval-source-map", // 可用选项参考：https://webpack.docschina.org/configuration/devtool
+		mode: isProd ? 'production' : 'development',
+		devtool: isProd ? 'source-map' : 'eval-source-map', // 可用选项参考：https://webpack.docschina.org/configuration/devtool
 		entry: {
-			index: "./src/index.js",
+			index: './src/index.js',
 		},
 		output: {
-			filename: "[name].[contenthash:8].js",
-			path: path.resolve(__dirname, "../dist"),
-			publicPath: "/", // 发送到 output.path 目录的每个文件，都将从 output.publicPath 位置引用
+			filename: '[name].[contenthash:8].js',
+			path: path.resolve(__dirname, '../dist'),
+			publicPath: '/', // 发送到 output.path 目录的每个文件，都将从 output.publicPath 位置引用
 			clean: true, // 每次构建前清理 /dist 文件夹
 		},
 		// 如果想要在一个 HTML 页面上使用多个入口，还需设置 optimization.runtimeChunk: 'single'
@@ -45,28 +48,28 @@ function getWebpackConfig() {
 			],
 			// chunk分离
 			splitChunks: {
-				chunks: "all",
+				chunks: 'all',
 				cacheGroups: {
 					vendor: {
 						test: /[\\/]node_modules[\\/]/,
-						name: "vendors",
+						name: 'vendors',
 						// 告诉 webpack 忽略 splitChunks.minSize、splitChunks.minChunks、splitChunks.maxAsyncRequests 和 splitChunks.maxInitialRequests 选项，并始终为此缓存组创建 chunk。
 						enforce: true,
 					},
 				},
 			},
-			runtimeChunk: "single",
+			runtimeChunk: 'single',
 		},
 		resolve: {
 			// import引入文件的时候不用加后缀,webpack会自动按顺序尝试解析
-			extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+			extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
 			// 路径别名
-			alias: { "@": path.resolve(__dirname, "../src") },
+			alias: { '@': path.resolve(__dirname, '../src') },
 		},
 		// 更多配置文档：https://webpack.docschina.org/configuration/dev-server
 		devServer: {
 			static: {
-				directory: path.join(__dirname, "../dist"),
+				directory: path.join(__dirname, '../dist'),
 			},
 			client: {
 				progress: true,
@@ -75,10 +78,10 @@ function getWebpackConfig() {
 			historyApiFallback: true,
 			hot: true,
 			open: true, // 自动打开浏览器
-			port: "auto", // 自动使用一个可用端口
+			port: 'auto', // 自动使用一个可用端口
 			proxy: {
-				"/api": {
-					target: "http://cf-pc-dev.wti-xa.com:7777",
+				'/api': {
+					target: 'http://cf-pc-dev.wti-xa.com:7777',
 					changeOrigin: true, // 设置为true, 本地就会虚拟一个服务器接收你的请求并代你发送该请求,主要解决跨域问题
 					pathRewrite: {
 						// '^/api': ''
@@ -94,24 +97,24 @@ function getWebpackConfig() {
 					test: /\.css$/i,
 					use: [
 						// 不要同时使用* `style-loader` *与* `mini-css-extract-plugin`*。*
-						isProd ? MiniCssExtractPlugin.loader : "style-loader",
-						"css-loader",
-						"postcss-loader",
+						isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+						'css-loader',
+						'postcss-loader',
 					],
 				},
 				{
 					test: /\.less$/i,
 					use: [
 						// compiles Less to CSS
-						isProd ? MiniCssExtractPlugin.loader : "style-loader",
-						"css-loader",
-						"postcss-loader",
-						"less-loader",
+						isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+						'css-loader',
+						'postcss-loader',
+						'less-loader',
 					],
 				},
 				{
 					test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
-					type: "asset",
+					type: 'asset',
 					// 不配置的情况下，webpack会把8k以下的文件转换成base64的URL
 					parser: {
 						dataUrlCondition: {
@@ -121,14 +124,14 @@ function getWebpackConfig() {
 				},
 				{
 					test: /\.(woff|woff2|eot|ttf|otf)$/i,
-					type: "asset/resource",
+					type: 'asset/resource',
 				},
 				{
 					test: /\.(js|mjs|jsx|ts|tsx)$/,
 					exclude: /(node_modules)/,
 					// include: path.resolve(__dirname, '../src'),
 					use: {
-						loader: "babel-loader",
+						loader: 'babel-loader',
 						options: {
 							cacheDirectory: !isProd, // 使用 cacheDirectory 选项，将 babel-loader 提速至少两倍。这会将转译的结果缓存到文件系统中。
 							// presets: [["@babel/preset-env", { targets: "ie 11" }]],
@@ -139,15 +142,15 @@ function getWebpackConfig() {
 				},
 				{
 					test: /\.vue$/,
-					use: "vue-loader",
+					use: 'vue-loader',
 				},
 			],
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
-				title: "Vue3+webpack5系统框架",
+				title: 'Vue3+webpack5系统框架',
 				template: appHtml,
-				favicon: path.resolve(__dirname, "../public/favicon.ico"),
+				favicon: path.resolve(__dirname, '../public/favicon.ico'),
 				// 附加一个唯一的webpack编译散列到所有包含的脚本和CSS文件。这对缓存破坏很有用
 				// 这里所有的引用都用一个hash值每次都会所有的都发生改变，所以用output的[contenthash]hash来替换这里。
 				// hash: true,
@@ -156,12 +159,12 @@ function getWebpackConfig() {
 			// 打包分析工具
 			isProd &&
 				new BundleAnalyzerPlugin({
-					analyzerMode: "static", // 生成一个分析报告的html文件（默认生成一个 report.html）
+					analyzerMode: 'static', // 生成一个分析报告的html文件（默认生成一个 report.html）
 					openAnalyzer: false, // 默认值为true，是否在浏览器中自动打开报表
 				}),
 			// 提取CSS文件
 			new MiniCssExtractPlugin({
-				filename: "css/[name].[contenthash:8].css",
+				filename: 'css/[name].[contenthash:8].css',
 			}),
 			new VueLoaderPlugin(),
 			// elementPlus自动导入相关配置
@@ -177,6 +180,6 @@ function getWebpackConfig() {
 				__VUE_PROD_DEVTOOLS__: false, // 开发阶段tree shaking
 			}),
 		].filter(Boolean), // 去掉假值
-	};
+	}
 }
-module.exports = getWebpackConfig();
+module.exports = getWebpackConfig()
