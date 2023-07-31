@@ -14,3 +14,10 @@
 $ npm install
 $ npm run dev
 ```
+
+
+## TODO
+
+- pinia模块化组织
+- 动态路由
+- axios：安装、封装请求、封装loading、自动组织接口、相同请求优化
