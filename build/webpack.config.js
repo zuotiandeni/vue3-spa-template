@@ -2,15 +2,15 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
-const appPath = path.resolve(__dirname, "../public/index.html");
-
-const isProd = process.env.NODE_ENV === "production";
+const appHtml = path.resolve(__dirname, "../public/index.html");
 // 本插件会提取css到单独的文件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // 此插件用于优化和压缩CSS
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+const isProd = process.env.NODE_ENV === "production";
 
 console.log(isProd);
 module.exports = {
@@ -20,9 +20,10 @@ module.exports = {
 		index: "./src/index.js",
 	},
 	output: {
-		filename: "[name].[contenthash:8].bundle.js",
+		filename: "[name].[contenthash:8].js",
 		path: path.resolve(__dirname, "../dist"),
-		clean: true, // 每次构建前都会先清理掉上一次的构建产物
+		// publicPath: "/", // 发送到 output.path 目录的每个文件，都将从 output.publicPath 位置引用
+		clean: true, // 每次构建前清理 /dist 文件夹
 	},
 	// 如果想要在一个 HTML 页面上使用多个入口，还需设置 optimization.runtimeChunk: 'single'
 	// // 将包含chunks映射关系的list单独从入口文件里提取出来，方便浏览器缓存，否则会在入口文件js中每次都会发生变化，所有的入口文件一起共同生成一个runtimeChunk。
@@ -46,37 +47,8 @@ module.exports = {
 			// js的压缩全靠这三个...，webpack认为，如果配置了minimizer，就表示开发者在自定义压缩插件，无论配置minimizer是true还是false，内部的JS压缩器都会被覆盖掉。所以我们这里要手动把它加回来，webpack内部使用的JS压缩器是terser-webpack-plugin.
 			`...`,
 			new CssMinimizerPlugin(),
-			new ImageMinimizerPlugin({
-				// 有损压缩
-				minimizer: {
-					implementation: ImageMinimizerPlugin.squooshMinify,
-					options: {
-						// Your options
-					},
-				},
-				// // 无损压缩
-				// minimizer: {
-				// 	implementation: ImageMinimizerPlugin.imageminMinify,
-				// 	options: {
-				// 		plugins: [
-				// 			["gifsicle", { interlaced: true }],
-				// 			["jpegtran", { progressive: true }],
-				// 			["optipng", { optimizationLevel: 5 }],
-				// 			[
-				// 				"svgo",
-				// 				{
-				// 					plugins: [
-				// 						{
-				// 							name: "preset-default",
-				// 						},
-				// 					],
-				// 				},
-				// 			],
-				// 		],
-				// 	},
-				// },
-			}),
 		],
+		minimize: isProd, // 如果是ture会进行js、css压缩，会产生LICENSE.txt文件，把注释提取到单独的txt文件中
 	},
 	// 更多配置文档：https://webpack.docschina.org/configuration/dev-server
 	devServer: {
@@ -133,10 +105,6 @@ module.exports = {
 			{
 				test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
 				type: "asset",
-				// 指定打包到哪个目录下
-				generator: {
-					filename: "assets/[hash][ext][query]",
-				},
 				// 不配置的情况下，webpack会把8k以下的文件转换成base64的URL
 				parser: {
 					dataUrlCondition: {
@@ -147,10 +115,6 @@ module.exports = {
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
 				type: "asset/resource",
-				// 指定打包到哪个目录下
-				generator: {
-					filename: "assets/[hash][ext][query]",
-				},
 			},
 			{
 				test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -166,12 +130,16 @@ module.exports = {
 					},
 				},
 			},
+			{
+				test: /\.vue$/,
+				use: "vue-loader",
+			},
 		],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: "Vue3+webpack5系统框架",
-			trmplate: appPath,
+			template: appHtml,
 			favicon: path.resolve(__dirname, "../public/favicon.ico"),
 			// 附加一个唯一的webpack编译散列到所有包含的脚本和CSS文件。这对缓存破坏很有用
 			// 这里所有的引用都用一个hash值每次都会所有的都发生改变，所以用output的[contenthash]hash来替换这里。
@@ -188,5 +156,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: "css/[name].[contenthash].css",
 		}),
-	],
+		new VueLoaderPlugin(),
+	].filter(Boolean), // 去掉假值
 };
