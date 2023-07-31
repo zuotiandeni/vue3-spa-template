@@ -27,7 +27,7 @@ function getWebpackConfig() {
 		mode: isProd ? 'production' : 'development',
 		devtool: isProd ? 'source-map' : 'eval-source-map', // 可用选项参考：https://webpack.docschina.org/configuration/devtool
 		entry: {
-			index: './src/index.js',
+			index: './src/main.js',
 		},
 		output: {
 			filename: '[name].[contenthash:8].js',
