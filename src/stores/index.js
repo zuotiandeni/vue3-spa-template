@@ -20,4 +20,8 @@ export const useUser = defineStore("useUser", {
 			this.age++;
 		},
 	},
+	// 持久化具体配置查看：https://prazdevs.github.io/pinia-plugin-persistedstate/guide/
+	persist: {
+		storage: sessionStorage, // 默认被存储在localstorage中
+	},
 });
