@@ -18,7 +18,9 @@
 		<div>年龄：{{ age }}</div>
 		<div>父亲年龄：{{ fatherAge }}</div>
 		<button @click="addUserAge">过生日</button>
-		<button @click="user.addUserAge()">调用actions</button>
+		<el-button type="success" round @click="user.addUserAge()"
+			>调用actions</el-button
+		>
 	</div>
 </template>
 

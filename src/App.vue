@@ -1,7 +1,6 @@
 <!-- src/App.vue -->
 <script setup>
 	import { useUser } from "@/stores/index";
-	import { storeToRefs } from "pinia"; // 保持响应式
 	import { ref } from "vue";
 	const welcome = ref("Hello vue");
 

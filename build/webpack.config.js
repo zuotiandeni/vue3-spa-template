@@ -12,6 +12,11 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const isProd = process.env.NODE_ENV === "production";
 
+// elementPlus自动导入相关配置
+const AutoImport = require("unplugin-auto-import/webpack");
+const Components = require("unplugin-vue-components/webpack");
+const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
+
 console.log(isProd);
 module.exports = {
 	mode: isProd ? "production" : "development",
@@ -157,5 +162,12 @@ module.exports = {
 			filename: "css/[name].[contenthash].css",
 		}),
 		new VueLoaderPlugin(),
+		// elementPlus自动导入相关配置
+		AutoImport({
+			resolvers: [ElementPlusResolver()],
+		}),
+		Components({
+			resolvers: [ElementPlusResolver()],
+		}),
 	].filter(Boolean), // 去掉假值
 };
