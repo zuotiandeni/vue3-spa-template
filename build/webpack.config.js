@@ -89,6 +89,7 @@ function getWebpackConfig() {
 			// https: true,
 		},
 		module: {
+			unknownContextCritical: false,
 			rules: [
 				{
 					test: /\.css$/i,

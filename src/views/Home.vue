@@ -2,6 +2,32 @@
 import { storeToRefs } from 'pinia' // 保持响应式
 import { useUser } from '@/stores/index'
 
+import { getCurrentInstance } from 'vue'
+
+const { proxy } = getCurrentInstance()
+const getWorkspaceData = () => {
+	proxy.$axios.users
+		.workbench({
+			pageCurrent: '1',
+			pageSize: '5',
+			taskStatusList: [2],
+			assigneeId: '15249264056',
+		})
+		.then(res => {
+			console.log(res)
+		})
+}
+
+getWorkspaceData()
+getWorkspaceData()
+getWorkspaceData()
+getWorkspaceData()
+setTimeout(() => {
+	getWorkspaceData()
+	getWorkspaceData()
+	getWorkspaceData()
+}, 2000)
+
 const user = useUser()
 // // 解构时，必须要storeToRefs
 const { name, age, fatherAge } = storeToRefs(user)
