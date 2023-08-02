@@ -133,7 +133,7 @@ const post = (url, data, headers) => {
 
 const get = (url, params, headers) => {
 	return axios({
-		method: 'post',
+		method: 'get',
 		url,
 		headers,
 		params,

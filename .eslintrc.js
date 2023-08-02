@@ -66,7 +66,7 @@ module.exports = {
 		'no-shadow': ['error', { allow: ['state', 'getters'] }],
 		// 默认情况下一个抛出被要求使用 export default
 		'import/prefer-default-export': [
-			{ target: 'single' | 'any' }, // default is "single"
+			{ target: 0 = 'off' }, // default is "single"
 		],
 	},
 }

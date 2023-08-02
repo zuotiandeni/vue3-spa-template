@@ -14,19 +14,19 @@ const getWorkspaceData = () => {
 			assigneeId: '15249264056',
 		})
 		.then(res => {
-			console.log(res)
+			console.log(res, '接收数据')
 		})
 }
 
 getWorkspaceData()
 getWorkspaceData()
 getWorkspaceData()
-getWorkspaceData()
 setTimeout(() => {
 	getWorkspaceData()
-	getWorkspaceData()
-	getWorkspaceData()
 }, 2000)
+setTimeout(() => {
+	getWorkspaceData()
+}, 4000)
 
 const user = useUser()
 // // 解构时，必须要storeToRefs
