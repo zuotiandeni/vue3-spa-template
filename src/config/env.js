@@ -1,4 +1,5 @@
 // api请求基路径
+// eslint-disable-next-line import/no-mutable-exports
 let baseURL = ''
 const isProd = process.env.NODE_ENV !== 'development'
 

@@ -101,13 +101,13 @@ function getWebpackConfig() {
 					],
 				},
 				{
-					test: /\.less$/i,
+					test: /\.s[ac]ss$/i,
 					use: [
 						// compiles Less to CSS
 						isProd ? MiniCssExtractPlugin.loader : 'style-loader',
 						'css-loader',
 						'postcss-loader',
-						'less-loader',
+						'sass-loader',
 					],
 				},
 				{
@@ -176,6 +176,9 @@ function getWebpackConfig() {
 				// 解决浏览器报的warning
 				__VUE_OPTIONS_API__: true, // 是否支持vue2的optionsAPI
 				__VUE_PROD_DEVTOOLS__: false, // 开发阶段tree shaking
+			}),
+			require('unplugin-element-plus/webpack')({
+				// options
 			}),
 		].filter(Boolean), // 去掉假值
 	}

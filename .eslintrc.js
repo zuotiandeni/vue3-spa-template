@@ -14,6 +14,7 @@ module.exports = {
 		'airbnb-base',
 		// 'prettier', // eslint-config-prettier 来关掉 (disable) 所有和 Prettier 冲突的 ESLint 的配置,prettier 一定要是最后一个，才能确保覆盖
 		'plugin:prettier/recommended', // 同时使用了 eslint-plugin-prettier 和 eslint-config-prettier 可以这么配置
+		'./.eslintrc-auto-import.json',
 	],
 	settings: {
 		'import/resolver': {
@@ -65,8 +66,6 @@ module.exports = {
 		// 禁止变量声明覆盖外层作用域的变量
 		'no-shadow': ['error', { allow: ['state', 'getters'] }],
 		// 默认情况下一个抛出被要求使用 export default
-		'import/prefer-default-export': [
-			{ target: 0 = 'off' }, // default is "single"
-		],
+		'import/prefer-default-export': 'off',
 	},
 }

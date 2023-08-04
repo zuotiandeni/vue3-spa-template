@@ -1,9 +1,8 @@
-// message.js
-
+import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
 // 必须手动引入样式
-import 'element-plus/es/components/message/style/css'
-const showMessage = function (options) {
+
+const showMessage = options => {
 	const messageDom = document.getElementsByClassName('el-message')[0]
 	if (messageDom === undefined) {
 		ElMessage(options)

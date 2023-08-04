@@ -1,27 +1,25 @@
-<!-- src/App.vue -->
-<script setup>
-import { ref } from 'vue'
-import { useUser } from '@/stores/index'
-
-const welcome = ref('Hello vue')
-
-const user = useUser()
-// 默认情况下，您可以通过 store 实例访问状态来直接读取和写入状态：
-const addUserAge = () => {
-	// 方式一：非解构修改数据
-	// user.age++;
-	// 方式二：非解构修改数据
-	user.$patch(state => {
-		state.age += 1
-	})
-}
-</script>
-
 <template>
-	<div>{{ welcome }}</div>
-	<RouterLink to="/home">Home {{ user.name }} {{ user.age }}</RouterLink>
-	<button @click="addUserAge">过生日</button>
-	<RouterView></RouterView>
+	<el-config-provider :message="messageMax">
+		<RouterView></RouterView>
+	</el-config-provider>
 </template>
 
-<style lang="less" scoped></style>
+<script setup>
+import { reactive, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { setTitleFromRoute } from '@/utils/common'
+
+const messageMax = reactive({
+	max: 3,
+})
+const route = useRoute()
+// 监听路由变化时更新浏览器标题
+watch(
+	() => route.path,
+	() => {
+		setTitleFromRoute()
+	},
+)
+</script>
+
+<style lang="scss" scoped></style>
