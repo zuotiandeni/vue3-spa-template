@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
+import { reactive, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { setTitleFromRoute } from '@/utils/common'
 
@@ -14,12 +14,15 @@ const messageMax = reactive({
 })
 const route = useRoute()
 // 监听路由变化时更新浏览器标题
-watch(
-	() => route.path,
-	() => {
-		setTitleFromRoute()
-	},
-)
+// watch(
+// 	() => route.path,
+// 	() => {
+// 		setTitleFromRoute()
+// 	},
+// )
+watchEffect(() => {
+	route.path && setTitleFromRoute()
+})
 </script>
 
 <style lang="scss" scoped></style>
