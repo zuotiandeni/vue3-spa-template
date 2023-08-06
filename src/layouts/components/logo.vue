@@ -10,21 +10,12 @@
 
 <script setup>
 import { usePageConfig } from '@/stores/pageConfig'
-import { Local } from '@/utils/storage'
 import { setNavTabsWidth } from '@/utils/layout'
 
 const config = usePageConfig()
 
 const onMenuCollapse = function () {
-	// if (!config.pageConfig.menuCollapse) {
-	// 	closeShade()
-	// }
 	config.setPageConfig('menuCollapse', !config.pageConfig.menuCollapse)
-
-	// Local.set(BEFORE_RESIZE_LAYOUT, {
-	// 	layoutMode: config.layout.layoutMode,
-	// 	menuCollapse: config.layout.menuCollapse,
-	// })
 	// 等待侧边栏动画结束后重新计算导航栏宽度
 	setTimeout(() => {
 		setNavTabsWidth()

@@ -1,33 +1,25 @@
 <template>
 	<el-header class="layout-header">
-		<div class="nav-bar">
-			<Tabs />
-			<div class="nav-menus">
-				<div @click="toggleDark()">黑夜模式切换</div>
-				<div>admin</div>
-			</div>
-		</div>
+		<component :is="config.pageConfig.layoutMode + 'NavBar'"></component>
 	</el-header>
 </template>
 
 <script setup>
-import toggleDark from '@/utils/useDark'
-import Tabs from './navBar/tabs.vue'
+import DefaultNavBar from './navBar/default.vue'
+import ClassicNavBar from './navBar/classic.vue'
+import { usePageConfig } from '@/stores/pageConfig'
+
+defineOptions({
+	name: 'layout/header',
+	components: { DefaultNavBar, ClassicNavBar },
+})
+
+const config = usePageConfig()
 </script>
 
 <style lang="scss" scoped>
 .layout-header {
 	height: auto;
 	padding: 0;
-	.nav-bar {
-		display: flex;
-		height: 50px;
-		margin: calc(var(--wti-normal-spacing) + 4px) var(--wti-normal-spacing) 0 var(--wti-normal-spacing);
-	}
-	.nav-menus {
-		display: flex;
-		margin-left: auto;
-		white-space: nowrap;
-	}
 }
 </style>

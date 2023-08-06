@@ -6,6 +6,7 @@
 			:key="tab.path"
 			:ref="tabsRefs.set"
 			@click="onTab(tab)"
+			:class="navTabs.navState.activeIndex == index ? 'active' : ''"
 		>
 			{{ tab.meta.title }}
 			<transition @after-leave="selectNavTab(tabsRefs[navTabs.navState.activeIndex])" name="el-fade-in">
@@ -29,9 +30,11 @@ import { nextTick, onMounted, reactive, ref } from 'vue'
 import { useTemplateRefsList } from '@vueuse/core'
 
 import { useNavTabs } from '@/stores/navTabs'
+import { usePageConfig } from '@/stores/pageConfig'
 
 const navTabs = useNavTabs()
 const router = useRouter()
+const config = usePageConfig()
 // 点击跳转
 const onTab = menuItem => {
 	router.push(menuItem)
@@ -105,6 +108,16 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.dark {
+	.close-icon {
+		color: v-bind('config.getColorVal("headerBarTabColor")') !important;
+	}
+	.nav-bar-tabs-item.active {
+		.close-icon {
+			color: v-bind('config.getColorVal("headerBarTabActiveColor")') !important;
+		}
+	}
+}
 .nav-bar-tabs {
 	display: flex;
 	height: 100%;
@@ -113,8 +126,8 @@ onMounted(() => {
 	overflow-y: hidden;
 
 	&-item {
-		// display: inline-block;
-		// height: 50px;
+		white-space: nowrap;
+		height: 40px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -125,12 +138,12 @@ onMounted(() => {
 		opacity: 0.7;
 	}
 
-	.nav-tabs-active-box {
-		position: absolute;
-		height: 50px;
-		background-color: var(--wti-bg-color-overlay);
-		transition: all 0.2s;
-		-webkit-transition: all 0.2s;
-	}
+	// .nav-tabs-active-box {
+	// 	position: absolute;
+	// 	height: 50px;
+	// 	background-color: var(--wti-bg-color-overlay);
+	// 	transition: all 0.2s;
+	// 	-webkit-transition: all 0.2s;
+	// }
 }
 </style>

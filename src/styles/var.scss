@@ -7,6 +7,9 @@ $normal-spacing: 16px;
 $small-spacing: 8px;
 $big-spacing: 24px;
 
+// 关闭按钮hover颜色
+$primary-light: #3f6ad8;
+
 // --wti-bg-color
 $bg-color: () !default;
 $bg-color: map.merge(
@@ -27,6 +30,7 @@ $border-color: map.merge(
 );
 
 :root {
+    @include set-css-var-value('color-primary-light', $primary-light);
     @include set-css-var-value('normal-spacing', $normal-spacing);
     @include set-css-var-value('small-spacing', $small-spacing);
     @include set-css-var-value('big-spacing', $big-spacing);

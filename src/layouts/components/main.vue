@@ -53,8 +53,8 @@ watchEffect(() => {
 .layout-main {
 	padding: 0 !important;
 
-	&-scrollbar {
-		margin: var(--wti-normal-spacing) var(--wti-normal-spacing) 60px var(--wti-normal-spacing);
+	:deep(.el-scrollbar__view) {
+		margin: var(--wti-normal-spacing);
 	}
 }
 </style>

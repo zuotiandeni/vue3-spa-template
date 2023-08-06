@@ -10,6 +10,7 @@ import { useEventListener } from '@vueuse/core'
 import { usePageConfig } from '@/stores/pageConfig'
 import { useNavTabs } from '@/stores/navTabs'
 import Default from '@/layouts/default.vue'
+import Classic from '@/layouts/classic.vue'
 import { cloneDeep } from 'lodash'
 import { setNavTabsWidth } from '@/utils/layout'
 
@@ -33,6 +34,6 @@ onMounted(() => {
 <!-- 只有在 components 选项中的组件可以被动态组件使用-->
 <script>
 export default {
-	components: { Default },
+	components: { Default, Classic },
 }
 </script>

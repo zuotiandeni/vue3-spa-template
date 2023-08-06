@@ -8,7 +8,7 @@ export const usePageConfig = defineStore(
 		const pageConfig = reactive({
 			// 是否黑暗模式
 			isDark: false,
-			// 页面布局方式
+			// 页面布局方式，可选值：<Default|Classic>，
 			layoutMode: 'Default',
 			// 后台主页面切换动画，可选值<slide-right|slide-left|el-fade-in-linear|el-fade-in|el-zoom-in-center|el-zoom-in-top|el-zoom-in-bottom>
 			mainAnimation: 'slide-right',
@@ -66,7 +66,34 @@ export const usePageConfig = defineStore(
 			return colors[0]
 		}
 
-		return { pageConfig, setPageConfig, menuWidth, getColorVal }
+		function onSetLayoutColor(data = pageConfig.layoutMode) {
+			// 切换布局时，如果是为默认配色方案，对菜单激活背景色重新赋值
+			const tempValue = pageConfig.isDark
+				? { idx: 1, color: '#1d1e1f', newColor: '#141414' }
+				: { idx: 0, color: '#ffffff', newColor: '#f5f5f5' }
+			if (
+				data == 'Classic' &&
+				pageConfig.headerBarBackground[tempValue.idx] == tempValue.color &&
+				pageConfig.headerBarTabActiveBackground[tempValue.idx] == tempValue.color
+			) {
+				pageConfig.headerBarTabActiveBackground[tempValue.idx] = tempValue.newColor
+			} else if (
+				data == 'Default' &&
+				pageConfig.headerBarBackground[tempValue.idx] == tempValue.color &&
+				pageConfig.headerBarTabActiveBackground[tempValue.idx] == tempValue.newColor
+			) {
+				pageConfig.headerBarTabActiveBackground[tempValue.idx] = tempValue.color
+			}
+
+			console.log(pageConfig.headerBarTabActiveBackground)
+		}
+
+		function setLayoutMode(data) {
+			pageConfig.layoutMode = data
+			onSetLayoutColor(data)
+		}
+
+		return { pageConfig, setPageConfig, menuWidth, getColorVal, onSetLayoutColor, setLayoutMode }
 	},
 	{
 		persist: {

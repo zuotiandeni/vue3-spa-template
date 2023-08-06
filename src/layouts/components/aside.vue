@@ -27,4 +27,14 @@ const menuWidth = computed(() => config.menuWidth())
 	transition: width 0.3s ease;
 	width: v-bind(menuWidth);
 }
+
+.layout-aside-Classic,
+.layout-aside-Double {
+	background: var(--wti-bg-color-overlay);
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+	transition: width 0.3s ease;
+	width: v-bind(menuWidth);
+}
 </style>
