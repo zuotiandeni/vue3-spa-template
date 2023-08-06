@@ -11,6 +11,7 @@ import { usePageConfig } from '@/stores/pageConfig'
 import { useNavTabs } from '@/stores/navTabs'
 import Default from '@/layouts/default.vue'
 import Classic from '@/layouts/classic.vue'
+import Streamline from '@/layouts/streamline.vue'
 import { cloneDeep } from 'lodash'
 import { setNavTabsWidth } from '@/utils/layout'
 
@@ -29,11 +30,16 @@ onMounted(() => {
 	setNavTabsWidth()
 	useEventListener(window, 'resize', setNavTabsWidth)
 })
+
+defineOptions({
+	name: 'layout/index',
+	components: { Default, Classic, Streamline },
+})
 </script>
 
 <!-- 只有在 components 选项中的组件可以被动态组件使用-->
-<script>
+<!-- <script>
 export default {
-	components: { Default, Classic },
+	components: { Default, Classic, Streamline },
 }
-</script>
+</script> -->

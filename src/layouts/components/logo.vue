@@ -2,7 +2,7 @@
 	<div class="layout-logo">
 		<img v-if="!config.pageConfig.menuCollapse" class="logo-img" src="@/assets/icon.png" alt="" />
 		<div v-if="!config.pageConfig.menuCollapse" class="website-name">系统模板演示站</div>
-		<el-icon class="fold" @click="onMenuCollapse">
+		<el-icon v-if="config.pageConfig.layoutMode !== 'Streamline'" class="fold" @click="onMenuCollapse">
 			<component :is="!config.pageConfig.menuCollapse ? 'ElIconFold' : 'ElIconExpand'"></component>
 		</el-icon>
 	</div>

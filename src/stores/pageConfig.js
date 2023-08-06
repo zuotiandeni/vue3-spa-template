@@ -8,7 +8,7 @@ export const usePageConfig = defineStore(
 		const pageConfig = reactive({
 			// 是否黑暗模式
 			isDark: false,
-			// 页面布局方式，可选值：<Default|Classic>，
+			// 页面布局方式，可选值：<Default|Classic|Streamline>，
 			layoutMode: 'Default',
 			// 后台主页面切换动画，可选值<slide-right|slide-left|el-fade-in-linear|el-fade-in|el-zoom-in-center|el-zoom-in-top|el-zoom-in-bottom>
 			mainAnimation: 'slide-right',
@@ -88,9 +88,12 @@ export const usePageConfig = defineStore(
 			console.log(pageConfig.headerBarTabActiveBackground)
 		}
 
-		function setLayoutMode(data) {
-			pageConfig.layoutMode = data
-			onSetLayoutColor(data)
+		function setLayoutMode(mode) {
+			pageConfig.layoutMode = mode
+			if (mode === 'Streamline') {
+				pageConfig.menuCollapse = false
+			}
+			onSetLayoutColor(mode)
 		}
 
 		return { pageConfig, setPageConfig, menuWidth, getColorVal, onSetLayoutColor, setLayoutMode }

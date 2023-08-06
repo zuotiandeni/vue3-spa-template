@@ -1,7 +1,7 @@
 <template>
 	<template v-for="(menu, idx) in props.menus">
 		<template v-if="menu.children && menu.children.length > 0">
-			<el-sub-menu :index="menu.path" :key="menu.path">
+			<el-sub-menu @click="onClickSubMenu(menu)" :index="menu.path" :key="menu.path">
 				<template #title>
 					<el-icon :color="config.getColorVal('menuColor')">
 						<component :is="menu.meta?.icon ? menu.meta?.icon : config.pageConfig.menuDefaultIcon" />
@@ -33,6 +33,12 @@ const props = defineProps({
 		type: Array,
 	},
 })
+
+const onClickSubMenu = menu => {
+	if (['Streamline', 'Double'].includes(config.pageConfig.layoutMode) && menu.children?.length) {
+		onClickMenu(menu.children[0])
+	}
+}
 </script>
 
 <style scoped lang="scss">
