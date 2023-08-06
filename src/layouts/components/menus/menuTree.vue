@@ -4,7 +4,6 @@
 			<el-sub-menu :index="menu.path" :key="menu.path">
 				<template #title>
 					<el-icon :color="config.getColorVal('menuColor')">
-						{{ config.pageConfig.menuDefaultIcon }}
 						<component :is="menu.meta?.icon ? menu.meta?.icon : config.pageConfig.menuDefaultIcon" />
 					</el-icon>
 					<span>{{ menu.meta?.title }}</span>

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import { isEmpty } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 
 import { STORE_TAB_VIEW_CONFIG } from './constant/cacheKey'
 
@@ -35,7 +35,8 @@ export const useNavTabs = defineStore(
 		})
 
 		// 添加tab
-		function addTab(route) {
+		function addTab(tabRoute) {
+			const route = cloneDeep(tabRoute)
 			// 当前点击的菜单是否允许加入到tabs列表中？
 			if (!route.meta.addtab) return
 			const tabItem = navState.tabsView.find(item => {
@@ -62,7 +63,8 @@ export const useNavTabs = defineStore(
 		}
 
 		// 设置当前选中的tab
-		const setActiveRoute = route => {
+		const setActiveRoute = tabRoute => {
+			const route = cloneDeep(tabRoute)
 			const currentRouteIndex = navState.tabsView.findIndex(item => {
 				return item.path === route.path
 			})

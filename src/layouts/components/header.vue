@@ -2,7 +2,10 @@
 	<el-header class="layout-header">
 		<div class="nav-bar">
 			<Tabs />
-			<div style="margin-left: auto" @click="toggleDark()">黑夜模式切换</div>
+			<div class="nav-menus">
+				<div @click="toggleDark()">黑夜模式切换</div>
+				<div>admin</div>
+			</div>
 		</div>
 	</el-header>
 </template>
@@ -20,6 +23,11 @@ import Tabs from './navBar/tabs.vue'
 		display: flex;
 		height: 50px;
 		margin: calc(var(--wti-normal-spacing) + 4px) var(--wti-normal-spacing) 0 var(--wti-normal-spacing);
+	}
+	.nav-menus {
+		display: flex;
+		margin-left: auto;
+		white-space: nowrap;
 	}
 }
 </style>

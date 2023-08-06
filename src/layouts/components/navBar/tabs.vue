@@ -39,7 +39,6 @@ const onTab = menuItem => {
 // 如果是关闭当前窗口，则跳转到前一个窗口
 const toLastTab = () => {
 	const lastTab = navTabs.navState.tabsView.slice(-1)[0]
-	console.log('你警告了吗', lastTab.path)
 	if (lastTab) {
 		router.push(lastTab.path)
 	} else {
@@ -98,7 +97,7 @@ const updateTab = newRoute => {
 }
 
 onBeforeRouteUpdate(async to => {
-	await updateTab(to)
+	updateTab(to)
 })
 onMounted(() => {
 	updateTab(router.currentRoute.value)

@@ -22,22 +22,40 @@ const staticRoutes = [
 					title: '控制台',
 					addtab: true, // true表示可以被添加进tab中
 					type: 'menu', // 可选值：menu，menu-
-					menu_type: 'tab',
+					menu_type: 'tab', // 可选值：tab、iframe、link
 					icon: 'ElIconHomeFilled',
+					keepalive: 'controlPanel', // 值为当前路由name
 				},
 			},
 			{
 				// 首页
 				path: '/productCenter',
 				name: 'productCenter',
-				component: () => import('@/views/productCenter.vue'),
 				meta: {
 					title: '产品中心',
 					addtab: true, // true表示可以被添加进tab中
-					type: 'menu', // 可选值：menu，menu-
+					type: 'menu', // 可选值：menu，menu-dir
 					menu_type: 'tab',
 					icon: 'ElIconHomeFilled',
+					keepalive: 0,
 				},
+				children: [
+					{
+						// 新建产品
+						path: '/productCenter/addProduct',
+						name: 'productCenter/productCenter',
+						component: () => import('@/views/productCenter/addProduct.vue'),
+						meta: {
+							title: '新建产品',
+							addtab: true, // true表示可以被添加进tab中
+							type: 'menu', // 可选值：menu，menu-
+							menu_type: 'tab',
+							icon: 'ElIconHomeFilled',
+							keepalive: 'productCenter/productCenter',
+							children: [],
+						},
+					},
+				],
 			},
 		],
 	},
@@ -57,7 +75,7 @@ const staticRoutes = [
 	// },
 	{
 		// 后台找不到页面了-可能是路由未加载上
-		path: '/admin:path(.*)*',
+		path: '/:path(.*)*',
 		meta: {},
 		redirect: to => {
 			return {

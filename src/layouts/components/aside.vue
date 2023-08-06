@@ -1,6 +1,6 @@
 <template>
 	<el-aside :class="'layout-aside-' + config.pageConfig.layoutMode">
-		<div v-if="config.pageConfig.menuShowTopBar">这是logo</div>
+		<Logo v-if="config.pageConfig.menuShowTopBar" />
 		<MenuVertical />
 	</el-aside>
 </template>
@@ -10,6 +10,7 @@ import { computed } from 'vue'
 
 import { usePageConfig } from '@/stores/pageConfig'
 import MenuVertical from './menus/menuVertical.vue'
+import Logo from './logo.vue'
 
 const config = usePageConfig()
 const menuWidth = computed(() => config.menuWidth())
