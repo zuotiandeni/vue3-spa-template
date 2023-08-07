@@ -9,9 +9,10 @@ import { useEventListener } from '@vueuse/core'
 
 import { usePageConfig } from '@/stores/pageConfig'
 import { useNavTabs } from '@/stores/navTabs'
-import Default from '@/layouts/default.vue'
-import Classic from '@/layouts/classic.vue'
-import Streamline from '@/layouts/streamline.vue'
+import Default from '@/layouts/container/default.vue'
+import Classic from '@/layouts/container/classic.vue'
+import Streamline from '@/layouts/container/streamline.vue'
+import Double from '@/layouts/container/double.vue'
 import { cloneDeep } from 'lodash'
 import { setNavTabsWidth } from '@/utils/layout'
 
@@ -33,7 +34,7 @@ onMounted(() => {
 
 defineOptions({
 	name: 'layout/index',
-	components: { Default, Classic, Streamline },
+	components: { Default, Classic, Streamline, Double },
 })
 </script>
 

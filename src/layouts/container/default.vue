@@ -9,9 +9,9 @@
 </template>
 
 <script setup>
-import Aside from './components/aside.vue'
-import Header from './components/header.vue'
-import Main from './components/main.vue'
+import Aside from '../components/aside.vue'
+import Header from '../components/header.vue'
+import Main from '../router-view/main.vue'
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,6 @@
 <template>
-	<div class="layouts-menu-horizontal">
-		<div class="menu-horizontal-logo" v-if="config.pageConfig.menuShowTopBar">
-			<Logo />
-		</div>
-		<el-scrollbar ref="horizontalMenusRef" class="horizontal-menus-scrollbar">
+	<div class="layouts-menu-horizontal-double">
+		<el-scrollbar ref="horizontalMenusRef" class="double-menus-scrollbar">
 			<el-menu
 				class="menu-horizontal"
 				mode="horizontal"
@@ -18,11 +15,11 @@
 
 <script setup>
 import { computed, nextTick, onMounted, reactive, ref } from 'vue'
-import Logo from '../logo.vue'
-import MenuTree from './menuTree.vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { usePageConfig } from '@/stores/pageConfig'
+import { currentRouteTopActivity } from '../menus/helper'
+import MenuTree from '../menus/menuTree.vue'
 import { useNavTabs } from '@/stores/navTabs'
+import { usePageConfig } from '@/stores/pageConfig'
 import { uuid } from '@/utils/random'
 
 const horizontalMenusRef = ref()
@@ -43,7 +40,8 @@ const menus = computed(() => {
 
 // 激活当前路由的菜单
 const currentRouteActive = currentRoute => {
-	state.defaultActive = currentRoute.path
+	let routeChildren = currentRouteTopActivity(currentRoute.path, navTabs.navState.tabsViewRoutes)
+	if (routeChildren) state.defaultActive = currentRoute.path
 }
 
 // 滚动条滚动到激活菜单所在位置
@@ -66,22 +64,15 @@ onBeforeRouteUpdate(to => {
 </script>
 
 <style scoped lang="scss">
-.layouts-menu-horizontal {
+.layouts-menu-horizontal-double {
 	display: flex;
 	align-items: center;
-	width: 100vw;
 	height: 60px;
 	background-color: var(--wti-bg-color-overlay);
 	border-bottom: solid 1px var(--el-color-info-light-8);
 }
-.menu-horizontal-logo {
-	width: 180px;
-	&:hover {
-		background-color: v-bind('config.getColorVal("headerBarHoverBackground")');
-	}
-}
-.horizontal-menus-scrollbar {
-	flex: 1;
+.double-menus-scrollbar {
+	width: 70vw;
 }
 .menu-horizontal {
 	border: none;

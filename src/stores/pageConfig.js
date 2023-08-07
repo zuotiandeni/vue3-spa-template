@@ -8,7 +8,7 @@ export const usePageConfig = defineStore(
 		const pageConfig = reactive({
 			// 是否黑暗模式
 			isDark: false,
-			// 页面布局方式，可选值：<Default|Classic|Streamline>，
+			// 页面布局方式，可选值：<Default|Classic|Streamline|Double>，
 			layoutMode: 'Default',
 			// 后台主页面切换动画，可选值<slide-right|slide-left|el-fade-in-linear|el-fade-in|el-zoom-in-center|el-zoom-in-top|el-zoom-in-bottom>
 			mainAnimation: 'slide-right',

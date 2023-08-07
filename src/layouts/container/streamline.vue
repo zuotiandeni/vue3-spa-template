@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-import Header from './components/header.vue'
-import Main from './components/main.vue'
+import Header from '../components/header.vue'
+import Main from '../router-view/main.vue'
 import { useNavTabs } from '@/stores/navTabs'
 const navTabs = useNavTabs()
 </script>

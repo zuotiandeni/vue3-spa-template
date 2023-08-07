@@ -1,7 +1,8 @@
 <template>
 	<el-aside :class="'layout-aside-' + config.pageConfig.layoutMode">
 		<Logo v-if="config.pageConfig.menuShowTopBar" />
-		<MenuVertical />
+		<MenuVerticalChildren v-if="config.pageConfig.layoutMode === 'Double'" />
+		<MenuVertical v-else />
 	</el-aside>
 </template>
 
@@ -10,6 +11,7 @@ import { computed } from 'vue'
 
 import { usePageConfig } from '@/stores/pageConfig'
 import MenuVertical from './menus/menuVertical.vue'
+import MenuVerticalChildren from './menus/menuVerticalChildren.vue'
 import Logo from './logo.vue'
 
 const config = usePageConfig()

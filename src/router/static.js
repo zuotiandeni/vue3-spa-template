@@ -43,7 +43,7 @@ const staticRoutes = [
 					{
 						// 新建产品
 						path: '/productCenter/addProduct',
-						name: 'productCenter/productCenter',
+						name: 'productCenter/addProduct',
 						component: () => import('@/views/productCenter/addProduct.vue'),
 						meta: {
 							title: '新建产品',
@@ -51,7 +51,22 @@ const staticRoutes = [
 							type: 'menu', // 可选值：menu，menu-
 							menu_type: 'tab',
 							icon: 'ElIconHomeFilled',
-							keepalive: 'productCenter/productCenter',
+							keepalive: 'productCenter/addProduct',
+							children: [],
+						},
+					},
+					{
+						// 新建产品
+						path: '/productCenter/productOverview',
+						name: 'productCenter/productOverview',
+						component: () => import('@/views/productCenter/productOverview.vue'),
+						meta: {
+							title: '产品概览',
+							addtab: true, // true表示可以被添加进tab中
+							type: 'menu', // 可选值：menu，menu-
+							menu_type: 'tab',
+							icon: 'ElIconHomeFilled',
+							keepalive: 'productCenter/productOverview',
 							children: [],
 						},
 					},

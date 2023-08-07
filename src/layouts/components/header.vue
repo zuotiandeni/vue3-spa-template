@@ -7,12 +7,13 @@
 <script setup>
 import DefaultNavBar from './navBar/default.vue'
 import ClassicNavBar from './navBar/classic.vue'
+import DoubleNavBar from './navBar/double.vue'
 import StreamlineNavBar from './menus/menuHorizontal.vue'
 import { usePageConfig } from '@/stores/pageConfig'
 
 defineOptions({
 	name: 'layout/header',
-	components: { DefaultNavBar, ClassicNavBar, StreamlineNavBar },
+	components: { DefaultNavBar, ClassicNavBar, StreamlineNavBar, DoubleNavBar },
 })
 
 const config = usePageConfig()

@@ -4,6 +4,7 @@
 		<el-button @click="setLayoutMode('Default')">默认布局</el-button>
 		<el-button @click="setLayoutMode('Classic')">经典布局</el-button>
 		<el-button @click="setLayoutMode('Streamline')">单栏布局</el-button>
+		<el-button @click="setLayoutMode('Double')">双栏布局</el-button>
 	</div>
 </template>
 
