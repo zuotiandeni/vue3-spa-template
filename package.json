@@ -37,6 +37,7 @@
 		"sass": "^1.64.2",
 		"sass-loader": "^13.3.2",
 		"style-loader": "^3.3.3",
+		"three": "^0.155.0",
 		"unplugin-auto-import": "^0.16.6",
 		"unplugin-element-plus": "^0.8.0",
 		"unplugin-vue-components": "^0.25.1",
