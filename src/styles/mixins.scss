@@ -3,6 +3,7 @@
     #{joinVarName($name)}: #{$value};
 }
 
+// 方法：拼接变量名
 @function joinVarName($list) {
     $name: '--wti';
     @each $item in $list {
@@ -13,7 +14,7 @@
     @return $name;
 }
 
-
+// 方法，获取css 变量的名称
 @function getCssVarName($args...) {
     @return joinVarName($args);
 }
@@ -22,6 +23,7 @@
  * 通过映射设置所有的CSS变量
  */
  @mixin set-component-css-var($name, $variables) {
+    // 循环得到key和value
     @each $attribute, $value in $variables {
         @if $attribute == 'default' {
             #{getCssVarName($name)}: #{$value};

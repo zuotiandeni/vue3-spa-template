@@ -12,6 +12,20 @@ $bg-color: map.merge(
     ),
     $bg-color
 );
+/*
+
+最终输出的是：
+$bg-color: {
+    '': #141414,
+    'overlay': #1d1e1f,
+}
+
+通过  set-component-css-var 方法
+会生成：
+--wti-bg-color: #141414
+--wti-bg-color-overlay: #1d1e1f
+
+*/
 
 // --wti-border-color
 $border-color: () !default;

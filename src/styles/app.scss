@@ -19,6 +19,12 @@
 .slide-left-enter-from {
     @extend .slide-right-leave-to;
 }
+
+/*
+
+@extend 就是使用 指定类名的样式
+
+*/
 .slide-left-leave-to {
     @extend .slide-right-enter-from;
 }
